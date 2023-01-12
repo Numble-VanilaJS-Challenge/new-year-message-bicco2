@@ -1,0 +1,15 @@
+{
+  "name": "new-year-message",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "vite": "^4.0.0"
+  }
+}
