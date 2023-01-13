@@ -11,7 +11,9 @@ function Router($container) {
   const route = () => {
     currentPage = null;
     const TargetPage = findMatchedRoute()?.element || NotFound;
+    // 현재 url이 routes 배열 안에 존재 그 url에 존재하는 객체의 element를 가져와 targetPage에 할당 시킴
     currentPage = new TargetPage(this.$container);
+    // 할당된 인스턴스 생성 , 호출시 반환
   };
 
   const init = () => {

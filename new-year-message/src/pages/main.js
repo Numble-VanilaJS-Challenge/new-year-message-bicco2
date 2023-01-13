@@ -6,7 +6,6 @@ function Main($container) {
   };
 
   this.render = () => {
-    // #app의 돔에 innerHTML로 추가함
     this.$container.innerHTML = ` 
       <main class="mainPage">
         메인 페이지에요.
