@@ -8,7 +8,7 @@ function Upload($container) {
   this.render = () => {
     this.$container.innerHTML = `
       <main >
-        글 상세 페이지에요.
+        글 업로드 페이지에요.
       </main>
     `;
   };
