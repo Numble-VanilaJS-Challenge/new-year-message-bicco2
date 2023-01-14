@@ -1,4 +1,4 @@
-function PostDetail($container) {
+function Upload($container) {
   this.$container = $container;
 
   this.setState = () => {
@@ -7,7 +7,7 @@ function PostDetail($container) {
 
   this.render = () => {
     this.$container.innerHTML = `
-      <main class="postDetailPage">
+      <main >
         글 상세 페이지에요.
       </main>
     `;
@@ -16,4 +16,4 @@ function PostDetail($container) {
   this.render();
 }
 
-export default PostDetail;
+export default Upload;

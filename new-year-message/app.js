@@ -12,6 +12,7 @@ function App($container) {
 
       e.preventDefault();
       const targetURL = e.target.href.replace(import.meta.BASE_URL, "");
+      console.log(targetURL);
       navigate(targetURL);
     });
 
