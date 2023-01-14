@@ -1,5 +1,3 @@
-import { navigate } from "../utils/navigate";
-import { $ } from "../utils/querySelector";
 import { createClickEventAtLink } from "../utils/createClickEventAtLink";
 
 function Main($container) {
