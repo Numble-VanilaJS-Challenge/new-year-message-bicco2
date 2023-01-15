@@ -40,7 +40,7 @@ function Upload($container) {
             </a>
           </div>
           <button id="img-add-button">
-            랜덤 이미지 추가하기 / 이미지 추가 완료
+            랜덤 이미지 추가하기
           </button>
           <input placeholder="글 제목을 작성해주세요." maxlength="50" id="input-title"></input>
           <textarea placeholder="글 내용을 작성해주세요." maxlength="500" id="textarea-title"></textarea>
@@ -56,7 +56,6 @@ function Upload($container) {
         .get("https://source.unsplash.com/random")
         .then((res) => {
           this.imgUrl = res.request.responseURL;
-          console.log("click");
           randomImgBtn.disabled = true;
           randomImgBtn.parentNode.removeChild(randomImgBtn);
           $("#common-header").insertAdjacentHTML(
@@ -69,22 +68,23 @@ function Upload($container) {
         });
     });
 
-    const titleValue = document.getElementById("input-title");
+    const inputTitle = document.getElementById("input-title");
     const contentValue = document.getElementById("textarea-title");
     const submitBtn = document.getElementById("submit-button");
 
-    titleValue.addEventListener("input", (e) => {
-      this.title = this.title + e.data;
+    inputTitle.addEventListener("input", (e) => {
+      const titleValue = document.getElementById("input-title").value;
+      this.title = titleValue;
     });
 
     contentValue.addEventListener("input", (e) => {
-      this.content = this.content + e.data;
+      const contentValue = document.getElementById("textarea-title").value;
+      this.content = contentValue;
     });
 
     submitBtn.addEventListener("click", () => {
       console.log(this.title);
       console.log(this.content);
-      console.log(this.imgUrl);
       if (this.title !== "" && this.content !== "" && this.imgUrl !== "") {
         customAxios
           .post("/post", {
@@ -96,8 +96,12 @@ function Upload($container) {
             location.replace("/");
           })
           .catch((err) => {
-            alert("잘못된 입력임");
+            if (err.request.status === 400) {
+              alert("중복글은 불가능합니다");
+            }
           });
+      } else {
+        alert("모두 입력하세요!");
       }
     });
 
