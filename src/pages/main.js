@@ -37,18 +37,18 @@ function Main($container) {
     `;
 
     if (this.postData !== "") {
-      this.postData.forEach((each) => {
+      this.postData.forEach((postItem) => {
         $("#post-list").insertAdjacentHTML(
           "beforeend",
           `<li id="post-item">
-        <a href="/post/12" id="link-to-post-main">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPgX7NT9rVjPDUUWMRSQ_6ZqdCRaKi92i_P_bf1YASGw&s">
-          <div>
-            <strong>${each.postId}</strong>
-            <p>내용</p>
-          </div>
-        </a>
-      </li>`
+            <a href="/post/12" id="link-to-post-main">
+              <img src=${postItem.image} style="width : 130px; height : 130px;">
+              <div>
+                <strong>${postItem.title}</strong>
+                <p>${postItem.content}</p>
+              </div>
+            </a>
+          </li>`
         );
       });
       const ATagToDetail = document.getElementById("link-to-post-main");
