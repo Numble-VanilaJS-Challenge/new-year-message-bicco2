@@ -1,3 +1,5 @@
+import { createClickEventAtLink } from "../utils/createClickEventAtLink";
+
 function Upload($container) {
   this.$container = $container;
 
@@ -9,9 +11,9 @@ function Upload($container) {
     this.$container.innerHTML = `
       <section >
         <div>
-          <a href="/" id="link-to-upload-main">뒤로가기
+          <a href="/" id="link-to-upload-upload1">뒤로가기
           </a>
-          <a href="/" id="link-to-upload-main">HPNY 2023
+          <a href="/" id="link-to-upload-upload2">HPNY 2023
           </a>
         </div>
         <button>
@@ -28,6 +30,10 @@ function Upload($container) {
         </button>
       </section>
     `;
+    const ATagToHome = document.getElementById("link-to-upload-upload1");
+    const ATagToBackBtn = document.getElementById("link-to-upload-upload2");
+    createClickEventAtLink(ATagToHome);
+    createClickEventAtLink(ATagToBackBtn);
   };
 
   this.render();

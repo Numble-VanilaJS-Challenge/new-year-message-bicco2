@@ -6,7 +6,7 @@ function App($container) {
   this.$container = $container;
 
   const init = () => {
-    $(".navbar").addEventListener("click", (e) => {
+    $("#app").addEventListener("click", (e) => {
       const target = e.target.closest("a");
       if (!(target instanceof HTMLAnchorElement)) return;
 

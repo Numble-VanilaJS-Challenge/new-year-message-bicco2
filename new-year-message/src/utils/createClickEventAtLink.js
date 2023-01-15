@@ -1,4 +1,5 @@
 import { navigate } from "./navigate";
+import Router from "../router";
 
 /**
  * @param  { HTMLAnchorElement } targetNode
