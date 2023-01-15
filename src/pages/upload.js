@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createClickEventAtLink } from "../utils/createClickEventAtLink";
 import { customAxios } from "../utils/customAxios";
+import { $ } from "../utils/querySelector";
 
 function Upload($container) {
   this.$container = $container;
@@ -57,6 +58,11 @@ function Upload($container) {
           this.imgUrl = res.request.responseURL;
           console.log("click");
           randomImgBtn.disabled = true;
+          randomImgBtn.parentNode.removeChild(randomImgBtn);
+          $("#common-header").insertAdjacentHTML(
+            "beforebegin",
+            `<button id="img-add-button" disabled style="background: lightgrey; cursor: not-allowed;">이미지 추가 완료</button>`
+          );
         })
         .catch((err) => {
           console.log(err);
