@@ -104,11 +104,6 @@ function Upload($container) {
         alert("모두 입력하세요!");
       }
     });
-
-    const ATagToHome = document.getElementById("link-to-upload-upload1");
-    const ATagToBackBtn = document.getElementById("link-to-upload-upload2");
-    createClickEventAtLink(ATagToHome);
-    createClickEventAtLink(ATagToBackBtn);
   };
 
   this.render();

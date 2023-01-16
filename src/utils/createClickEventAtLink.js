@@ -13,4 +13,5 @@ export const createClickEventAtLink = (targetNode) => {
 
     navigate(targetURL);
   });
+  // new Router();
 };

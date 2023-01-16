@@ -1,51 +1,80 @@
-import { createClickEventAtLink } from "../utils/createClickEventAtLink";
+import { $ } from "../utils/querySelector";
+import { customAxios } from "../utils/customAxios";
 
 function Post($container) {
   this.$container = $container;
+  this.postData = "";
+  this.commentDataList = "";
 
-  this.setState = () => {
+  this.setState = (postState, commentState) => {
+    this.postData = postState;
+    this.commentDataList = commentState;
     this.render();
   };
 
+  const postId = location.search.split("?")[1];
+
+  customAxios
+    .get(`/post/${postId}`)
+    .then((res) => {
+      this.setState(res.data.data.post, res.data.data.comments);
+    })
+    .catch((error) => console.log(error));
+
   this.render = () => {
     this.$container.innerHTML = `
-    <section >
-      <div>
+    <section 
+      style="background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      padding-bottom: 64px;
+      overflow: hidden;">
+      <div id="common-header" style="justify-content: space-between;">
         <a href="/" id="link-to-upload-post1">뒤로가기
         </a>
         <a href="/" id="link-to-upload-post2">HPNY 2023
         </a>
       </div>
      
-      <article>
-        <img src="https://images.unsplash.com/photo-1672425445243-a2…Hx8fHx8fDE2NzM2MzU1OTE&ixlib=rb-4.0.3&q=80&w=1080"/>
-        <strong>글 제목</strong>
-        <span>2023.10.2</span>
-        <p>글 내용</p>
-        <a href="/edit/12" id="link-to-edit-post">
+      <article id="post-article">
+        <img src=${this.postData.image} id="post-img"/>
+        <strong>${this.postData.title}</strong>
+        <span>${this.postData.updatedAt}</span>
+        <p>${this.postData.content}</p>
+        <a href="/edit/12" id="post-update-button">
           수정
         </a>
-        <button>
+        <button id="post-delete-button">
           삭제
         </button>
       </article>
-      <section>
+      <section id="comment-section">
         <form>
-          <input>댓글 내용</input>
-          <button>게시</button>
+          <input></input>
+          <button type="submit">게시</button>
         </form>
-        <ul>댓글 1</ul>
-        <ul>댓글 2</ul>
+        <ul id="comment-list">
+        </ul>
+
       </section>
     </section>
     `;
-    const ATagToHome = document.getElementById("link-to-upload-post1");
-    const ATagToBackBtn = document.getElementById("link-to-upload-post2");
-    const ATagToEdit = document.getElementById("link-to-edit-post");
 
-    createClickEventAtLink(ATagToHome);
-    createClickEventAtLink(ATagToBackBtn);
-    createClickEventAtLink(ATagToEdit);
+    if (this.commentDataList !== "") {
+      this.commentDataList.forEach((commentItem) => {
+        $("#comment-list").insertAdjacentHTML(
+          "beforeend",
+          `<li id="comment">
+            <p>${commentItem.content}</p>
+            <p id="comment-id" style="visibility : hidden">${commentItem.commentId}</p>
+            <button id="comment-delete-btn">삭제</button>
+          </li>`
+        );
+      });
+    }
   };
 
   this.render();

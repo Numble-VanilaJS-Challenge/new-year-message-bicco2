@@ -20,7 +20,9 @@ function Router($container) {
     window.addEventListener("historychange", ({ detail }) => {
       const { to, isReplace } = detail;
 
-      if (isReplace || to === location.pathname)
+      const customPathname = "http://localhost:3000" + location.pathname;
+
+      if (isReplace || to === customPathname)
         history.replaceState(null, "", to);
       else history.pushState(null, "", to);
 

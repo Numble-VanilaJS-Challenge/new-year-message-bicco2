@@ -11,7 +11,7 @@ function App($container) {
       if (!(target instanceof HTMLAnchorElement)) return;
 
       e.preventDefault();
-      const targetURL = e.target.href.replace(import.meta.BASE_URL, "");
+      const targetURL = target.href.replace(import.meta.BASE_URL, "");
       console.log(targetURL);
       navigate(targetURL);
     });

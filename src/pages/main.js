@@ -41,8 +41,8 @@ function Main($container) {
         $("#post-list").insertAdjacentHTML(
           "beforeend",
           `<li id="post-item">
-            <a href="/post/12" id="link-to-post-main">
-              <img src=${postItem.image} style="width : 130px; height : 130px;">
+            <a href="/post?${postItem.postId}" id="link-to-post-main">
+              <img src=${postItem.image} style="width : 130px; height : 130px; border-radius: 8px;">
               <div>
                 <strong>${postItem.title}</strong>
                 <p>${postItem.content}</p>
@@ -51,15 +51,7 @@ function Main($container) {
           </li>`
         );
       });
-      const ATagToDetail = document.getElementById("link-to-post-main");
-      createClickEventAtLink(ATagToDetail);
     }
-
-    const ATagToHome = document.getElementById("link-to-main");
-    const ATagToUpload = document.getElementById("create-post-link");
-
-    createClickEventAtLink(ATagToHome);
-    createClickEventAtLink(ATagToUpload);
   };
 
   this.render();

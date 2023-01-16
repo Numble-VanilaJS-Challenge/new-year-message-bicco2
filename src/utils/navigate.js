@@ -10,5 +10,7 @@ export const navigate = (to, isReplace = false) => {
     },
   });
 
+  console.log(historyChangeEvent);
+
   dispatchEvent(historyChangeEvent);
 };
