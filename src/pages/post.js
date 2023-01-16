@@ -43,9 +43,9 @@ function Post($container) {
         <strong>${this.postData.title}</strong>
         <span>${this.postData.updatedAt}</span>
         <p>${this.postData.content}</p>
-        <a href="/edit/12" id="post-update-button">
+        <button  id="post-update-button">
           수정
-        </a>
+        </button>
         <button id="post-delete-button">
           삭제
         </button>
@@ -60,42 +60,19 @@ function Post($container) {
       </section>
     </section>
     `;
-
-    if (this.commentDataList !== "") {
-      this.commentDataList.forEach((commentItem) => {
-        $("#comment-list").insertAdjacentHTML(
-          "beforebegin",
-
-          `<li id="comment">
-            <p>${commentItem.content}</p>
-            <button id=${commentItem.commentId}>삭제</button>
-          </li>`
-        );
-        const deleteBtn = document.getElementById(commentItem.commentId);
-        deleteBtn.addEventListener("click", () => {
-          if (window.confirm("삭제하시겠습니까?")) {
-            customAxios
-              .delete(`/comment/${commentItem.commentId}`)
-              .then((res) => {
-                location.reload();
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          } else {
-          }
-        });
-      });
-    }
+    const test = document.getElementById("post-update-button");
+    test.addEventListener("click", () => {
+      location.replace(`/edit?${this.postData.postId}`);
+    });
 
     const commentInput = document.getElementById("comment-input");
+    const submitBtn = document.getElementById("submit-btn");
 
     commentInput.addEventListener("input", (e) => {
       const commentValue = document.getElementById("comment-input").value;
       this.comment = commentValue;
     });
 
-    const submitBtn = document.getElementById("submit-btn");
     submitBtn.addEventListener("click", (e) => {
       e.preventDefault();
       customAxios
@@ -111,6 +88,48 @@ function Post($container) {
           }
         });
     });
+
+    const postDeleteBtn = document.getElementById("post-delete-button");
+    postDeleteBtn.addEventListener("click", () => {
+      if (window.confirm("삭제하시겠습니까?")) {
+        customAxios
+          .delete(`/post/${this.postData.postId}`)
+          .then((res) => {
+            location.replace("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+      }
+    });
+
+    if (this.commentDataList !== "") {
+      this.commentDataList.forEach((commentItem) => {
+        $("#comment-list").insertAdjacentHTML(
+          "beforebegin",
+
+          `<li id="comment">
+            <p>${commentItem.content}</p>
+            <button id=${commentItem.commentId}>삭제</button>
+          </li>`
+        );
+        const commentDeleteBtn = document.getElementById(commentItem.commentId);
+        commentDeleteBtn.addEventListener("click", () => {
+          if (window.confirm("삭제하시겠습니까?")) {
+            customAxios
+              .delete(`/comment/${commentItem.commentId}`)
+              .then((res) => {
+                location.reload();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } else {
+          }
+        });
+      });
+    }
   };
 
   this.render();
