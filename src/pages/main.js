@@ -6,8 +6,8 @@ function Main($container) {
   this.$container = $container;
   this.postData = "";
 
-  customAxios
-    .get("/posts")
+  axios
+    .get("http://43.201.103.199/posts")
     .then((res) => {
       this.setState(res.data.data.posts);
     })
