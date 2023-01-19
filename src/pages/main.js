@@ -1,6 +1,7 @@
 import { createClickEventAtLink } from "../utils/createClickEventAtLink";
 import { $ } from "../utils/querySelector";
 import { customAxios } from "../utils/customAxios";
+import axios from "axios";
 
 function Main($container) {
   this.$container = $container;
