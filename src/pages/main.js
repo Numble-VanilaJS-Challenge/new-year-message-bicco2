@@ -1,14 +1,12 @@
-import { createClickEventAtLink } from "../utils/createClickEventAtLink";
 import { $ } from "../utils/querySelector";
 import { customAxios } from "../utils/customAxios";
 import axios from "axios";
-
 function Main($container) {
   this.$container = $container;
   this.postData = "";
 
-  axios
-    .get("http://43.201.103.199/posts")
+  customAxios
+    .get("/posts")
     .then((res) => {
       this.setState(res.data.data.posts);
     })
