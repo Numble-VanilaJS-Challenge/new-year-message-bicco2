@@ -1,5 +1,5 @@
 import { routes } from "./constants/routeInfo";
-import NotFound from "./pages/notfound";
+import NotFound from "./pages/notFound";
 
 function Router($container) {
   this.$container = $container;
